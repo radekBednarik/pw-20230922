@@ -1,7 +1,10 @@
 import BasePage from "./basePage";
+import HeaderComponent from "../page-components/header";
 import type { Page, Locator } from "@playwright/test";
 
 export default class FormPage extends BasePage {
+  public readonly header: HeaderComponent;
+
   public readonly url: string;
 
   public readonly locatorFormSelf: Locator;
@@ -18,6 +21,8 @@ export default class FormPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
+
+    this.header = new HeaderComponent(page);
 
     this.url = "/styled/basic-html-form-test.html";
 
