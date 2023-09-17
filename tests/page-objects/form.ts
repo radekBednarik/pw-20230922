@@ -37,4 +37,33 @@ export default class FormPage extends BasePage {
   public async visit() {
     return super.visit(this.url);
   }
+
+  public async fill({
+    username,
+    password,
+    comment,
+    file,
+    checkboxIndex,
+    radioIndex,
+    multiSelectValues,
+    dropdownValue,
+  }: {
+    username: string;
+    password: string;
+    comment: string;
+    file: string;
+    checkboxIndex: number;
+    radioIndex: number;
+    multiSelectValues: string[];
+    dropdownValue: string;
+  }) {
+    await this.locatorInputUsername.fill(username);
+    await this.locatorInputPassword.fill(password);
+    await this.locatorComment.fill(comment);
+    await this.locatorInputFileUpload.setInputFiles(file);
+    await this.locatorInputCheckboxes.nth(checkboxIndex).check();
+    await this.locatorInputRadios.nth(radioIndex).check();
+    await this.locatorInputMultipleSelect.selectOption(multiSelectValues);
+    await this.locatorInputDropdown.selectOption(dropdownValue);
+  }
 }
